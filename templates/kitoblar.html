@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kitoblar ro'yxati</title>
+</head>
+<body>
+    <h1>Kitoblar ro'yxati</h1>
+    <hr>
+
+    <form method="get">
+        <input type="text" name="q" value="{{ q }}" placeholder="Qidiruv...">
+
+        <select name="sort">
+            <option value="nom" {% if sort == 'nom' %}selected{% endif %}>Nomi bo'yicha (a -> z)</option>
+            <option value="-nom" {% if sort == '-nom' %}selected{% endif %}>Nomi bo'yicha (z -> a)</option>
+            <option value="sahifa" {% if sort == 'sahifa' %}selected{% endif %}>Sahifa bo'yicha ↑</option>
+            <option value="-sahifa" {% if sort == '-sahifa' %}selected{% endif %}>Sahifa bo'yicha ↓</option>
+        </select>
+
+        <button type="submit">Go</button>
+    </form>
+
+    <br>
+    <ol>
+        {% for kitob in kitoblar %}
+            <li>
+                <a href="{% url 'kitob_detail' kitob.id %}">{{ kitob.nom }}</a>
+                ({{ kitob.sahifa }} bet) |
+                <a href="{% url 'kitob_delete' kitob.id %}" style="color: red;">O'chirish</a>
+            </li>
+        {% empty %}
+            <li>Kitob topilmadi.</li>
+        {% endfor %}
+    </ol>
+
+    <hr>
+    <a href="{% url 'home' %}">Bosh sahifaga qaytish</a>
+</body>
+</html>

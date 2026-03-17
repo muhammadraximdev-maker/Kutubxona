@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kutubxonachilar | Kutubxona</title>
+</head>
+<body>
+ <h1>Kutubxonachilar ro'yxati</h1>
+    <hr>
+
+    <ol>
+        {% for Kutubxonachi in kutubxonachilar %}
+            <li>{{ Kutubxonachi.ism }}</li>
+        {% empty %}
+            <li>⚠️ Hozircha bazada kutubxonachi mavjud emas. Admin panel orqali qo'shing!</li>
+        {% endfor %}
+    </ol>
+
+    <br>
+    <a href="{% url 'home' %}">Bosh sahifaga qaytish</a>
+</body>
+</html>

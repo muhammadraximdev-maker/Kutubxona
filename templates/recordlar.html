@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recordlar | Kutubxona</title>
+</head>
+<body>
+    <h1>Kutubxona Recordlari (Kitob topshirish-olish)</h1>
+    <hr>
+
+    <table border="1" cellpadding="10">
+        <thead>
+            <tr>
+                <th>Talaba</th>
+                <th>Kitob</th>
+                <th>Kutubxonachi</th>
+                <th>Olingan sana</th>
+                <th>Qaytarish muddati</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in recordlar %}
+                <tr>
+                    <td>{{ record.talaba.ism }}</td>
+                    <td>{{ record.kitob.nom }}</td>
+                    <td>{{ record.kutubxonachi.ism }}</td>
+                    <td>{{ record.olingan_sana }}</td>
+                    <td>{{ record.qaytarish_sana }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="5">⚠️ Hozircha hech qanday record mavjud emas.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+    <a href="{% url 'home' %}">Bosh sahifaga qaytish</a>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head><title>Mualliflar</title></head>
+<body>
+    <h1>Mualliflar ro'yxati</h1>
+    <form method="get">
+        <input type="text" name="q" placeholder="Muallif ismi..." value="{{ q }}">
+        <button type="submit">Qidirish</button>
+    </form>
+    <hr>
+    <ol>
+        {% for muallif in mualliflar %}
+            <li>
+                <a href="{% url 'muallif_detail' muallif.id %}">{{ muallif.ism }}</a>
+                ({{ muallif.kitob_soni }} ta kitob)
+                | <a href="{% url 'muallif_delete' muallif.id %}" onclick="return confirm('O\'chirilsinmi?')" style="color: red;">O'chirish</a>
+            </li>
+        {% empty %}
+            <li>Muallif topilmadi.</li>
+        {% endfor %}
+    </ol>
+    <a href="{% url 'home' %}">Orqaga</a>
+</body>
+</html>

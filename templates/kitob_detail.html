@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head><title>{{ kitob.nom }} | Detal</title></head>
+<body>
+    <h1>Kitob haqida ma'lumot</h1>
+    <hr>
+    <p><b>Nomi:</b> {{ kitob.nom }}</p>
+    <p><b>Janri:</b> {{ kitob.janr }}</p>
+    <p><b>Sahifalar soni:</b> {{ kitob.sahifa }}</p>
+    <p><b>Muallifi:</b> {{ kitob.muallif.ism }}</p>
+    <br>
+    <a href="{% url 'kitoblar' %}">Ro'yxatga qaytish</a>
+</body>
+</html>

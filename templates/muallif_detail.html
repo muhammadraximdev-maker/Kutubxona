@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head><title>{{ muallif.ism }} | Detal</title></head>
+<body>
+    <h1>Muallif haqida ma'lumot</h1>
+    <hr>
+    <p><b>Ismi:</b> {{ muallif.ism }}</p>
+    <p><b>Jinsi:</b> {{ muallif.jins }}</p>
+    <p><b>Tug'ilgan sanasi:</b> {{ muallif.tugilgan_sana }}</p>
+    <p><b>Kitoblari soni:</b> {{ muallif.kitob_soni }}</p>
+    <p><b>Tirikmi:</b> {% if muallif.tirik %} Ha {% else %} Yo'q {% endif %}</p>
+    <br>
+    <a href="{% url 'mualliflar' %}">Ro'yxatga qaytish</a>
+</body>
+</html>

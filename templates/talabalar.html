@@ -1,0 +1,32 @@
+<html>
+<head>
+    <title>Talabalar ro'yxati</title>
+</head>
+<body>
+
+<h1>Talabalar ro'yxati</h1>
+<hr>
+
+<form method="get">
+    <input type="text" name="q" value="{{ q }}" placeholder="Ism bo'yicha...">
+
+    <select name="sort">
+        <option value="ism" {% if sort == 'ism' %}selected{% endif %}>Ismi bo'yicha (a -> z)</option>
+        <option value="-ism" {% if sort == '-ism' %}selected{% endif %}>Ismi bo'yicha (z -> a)</option>
+    </select>
+
+    <button type="submit">Go</button>
+</form>
+
+<br>
+
+<ol>
+{% for talaba in talabalar %}
+    <li>
+        <a href="{% url 'talaba_detail' talaba.id %}">{{ talaba.ism }}</a>
+    </li>
+{% endfor %}
+</ol>
+
+</body>
+</html>
