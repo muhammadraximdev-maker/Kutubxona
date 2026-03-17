@@ -1,24 +1,42 @@
 <!DOCTYPE html>
 <html>
-<head><title>Mualliflar</title></head>
+<head>
+    <title>Mualliflar ro'yxati</title>
+</head>
 <body>
     <h1>Mualliflar ro'yxati</h1>
+    <hr>
+
     <form method="get">
-        <input type="text" name="q" placeholder="Muallif ismi..." value="{{ q }}">
-        <button type="submit">Qidirish</button>
+        <input type="text" name="q" placeholder="Muallif ismi..." {% if q %}value="{{ q }}"{% endif %}>
+
+        <select name="sort">
+            <option value="ism" {% if sort == 'ism' %}selected{% endif %}>Ism bo'yicha (A → Z)</option>
+            <option value="-ism" {% if sort == '-ism' %}selected{% endif %}>Ism bo'yicha (Z → A)</option>
+            <option value="-kitob_soni" {% if sort == '-kitob_soni' %}selected{% endif %}>Kitoblar soni ↓</option>
+        </select>
+
+        <button type="submit">Go</button>
     </form>
     <hr>
-    <ol>
-        {% for muallif in mualliflar %}
-            <li>
-                <a href="{% url 'muallif_detail' muallif.id %}">{{ muallif.ism }}</a>
-                ({{ muallif.kitob_soni }} ta kitob)
-                | <a href="{% url 'muallif_delete' muallif.id %}" onclick="return confirm('O\'chirilsinmi?')" style="color: red;">O'chirish</a>
-            </li>
-        {% empty %}
-            <li>Muallif topilmadi.</li>
-        {% endfor %}
-    </ol>
-    <a href="{% url 'home' %}">Orqaga</a>
+
+    {% for muallif in mualliflar %}
+    <p>
+        {{ forloop.counter }}.
+        <a href="{% url 'muallif_detail' muallif.id %}">
+            {{ muallif.ism }}
+        </a>
+        ({{ muallif.kitob_soni }} ta kitob)
+
+        <a href="{% url 'muallif_delete_confirm' muallif.id %}">
+            <button>O'chirish</button>
+        </a>
+    </p>
+    {% empty %}
+    <p>Mualliflar topilmadi.</p>
+    {% endfor %}
+
+    <br>
+    <a href="{% url 'home' %}">Bosh sahifaga qaytish</a>
 </body>
 </html>

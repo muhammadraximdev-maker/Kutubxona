@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html>
-<head><title>{{ talaba.ism }} haqida</title></head>
+<head>
+    <title>{{ talaba.ism }} haqida</title>
+</head>
 <body>
     <h1>Talaba ma'lumotlari</h1>
     <hr>
+
     <p><b>Ismi:</b> {{ talaba.ism }}</p>
     <p><b>Guruhi:</b> {{ talaba.guruh }}</p>
     <p><b>Kursi:</b> {{ talaba.kurs }}</p>
     <p><b>Olingan kitoblari:</b> {{ talaba.kitob_soni }} ta</p>
+
     <br>
     <a href="{% url 'talabalar' %}">Ro'yxatga qaytish</a>
 </body>

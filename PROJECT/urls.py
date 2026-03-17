@@ -17,9 +17,12 @@ urlpatterns = [
     path('muallif/<int:pk>/', muallif_detail_view, name='muallif_detail'),
     path('kutubxonachi/<int:pk>/', kutubxonachi_detail_view, name='kutubxonachi_detail'),
 
-    path('talaba-ochirish/<int:pk>/', talaba_delete_view, name='talaba_delete'),
-    path('kitob-ochirish/<int:pk>/', kitob_delete_view, name='kitob_delete'),
-    path('muallif-ochirish/<int:pk>/', muallif_delete_view, name='muallif_delete'),
-    path('record-ochirish/<int:pk>/', record_delete_view, name='record_delete'),
-    path('kutubxonachi-ochirish/<int:pk>/', kutubxonachi_delete_view, name='kutubxonachi_delete'),
+    path('talabalar/<int:pk>/delete', talaba_delete_view, name='talaba_delete'),
+    path('talabalar/<int:pk>/delete-confirm', talaba_delete_confirm_view),
+    path('kitob/<int:pk>/delete', kitob_delete_view, name='kitob_delete'),
+    path('kitoblar/<int:pk>/delete-confirm/', kitob_delete_confirm_view, name='kitob_delete_confirm'),
+    path('muallif/<int:pk>/delete', muallif_delete_view, name='muallif_delete'),
+    path('mualliflar/<int:pk>/delete-confirm/', muallif_delete_confirm_view, name='muallif_delete_confirm'),
+    path('record/<int:pk>/delete', record_delete_view, name='record_delete'),
+    path('kutubxonachi/<int:pk>/delete', kutubxonachi_delete_view, name='kutubxonachi_delete'),
 ]

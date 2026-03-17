@@ -4,20 +4,34 @@ from .models import Talaba, Kitob, Muallif, Record, Kutubxonachi
 def home_view(request):
     return render(request, 'home.html')
 
-def talabalar_view(request):
-    q = request.GET.get('q', '')
-    sort = request.GET.get('sort', 'ism')
-    talabalar = Talaba.objects.filter(ism__icontains=q).order_by(sort)
-    return render(request, 'talabalar.html', {'talabalar': talabalar, 'q': q, 'sort': sort})
 
+def talabalar_view(request):
+    search_query = request.GET.get('search', '')
+    sort_param = request.GET.get('sort', 'ism')
+
+    if search_query:
+        talabalar = Talaba.objects.filter(ism__icontains=search_query)
+    else:
+        talabalar = Talaba.objects.all()
+
+    talabalar = talabalar.order_by(sort_param)
+
+    return render(request, 'talabalar.html', {
+        'talabalar': talabalar,
+        'search': search_query,
+        'sort': sort_param
+    })
 def talaba_detail_view(request, pk):
     talaba = Talaba.objects.get(id=pk)
     return render(request, 'talaba_detail.html', {'talaba': talaba})
-
 def talaba_delete_view(request, pk):
     talaba = Talaba.objects.get(id=pk)
     talaba.delete()
     return redirect('talabalar')
+def talaba_delete_confirm_view(request, pk):
+    talaba = Talaba.objects.get(id=pk)
+    context = {'talaba': talaba}
+    return render(request, 'talaba_delete_confirm.html', context)
 
 def kitoblar_view(request):
     q = request.GET.get('q', '')
@@ -34,10 +48,25 @@ def kitob_delete_view(request, pk):
     kitob.delete()
     return redirect('kitoblar')
 
+def kitob_delete_confirm_view(request, pk):
+    kitob = Kitob.objects.get(id=pk)
+    return render(request, 'kitob_delete_confirm.html', {'kitob': kitob})
+
+
 def mualliflar_view(request):
     q = request.GET.get('q', '')
-    mualliflar = Muallif.objects.filter(ism__icontains=q).order_by('-kitob_soni')
-    return render(request, 'mualliflar.html', {'mualliflar': mualliflar, 'q': q})
+    sort = request.GET.get('sort', 'ism')  # Ism bo'yicha saralash qo'shildi
+
+    mualliflar = Muallif.objects.filter(ism__icontains=q).order_by(sort)
+
+    return render(request, 'mualliflar.html', {
+        'mualliflar': mualliflar,
+        'q': q,
+        'sort': sort
+    })
+def muallif_delete_confirm_view(request, pk):
+    muallif = Muallif.objects.get(id=pk)
+    return render(request, 'muallif_delete_confirm.html', {'muallif': muallif})
 
 def muallif_detail_view(request, pk):
     muallif = Muallif.objects.get(id=pk)
@@ -75,19 +104,10 @@ def kutubxonachi_delete_view(request, pk):
 
 def kitoblar_view(request):
     q = request.GET.get('q', '')
-    sort = request.GET.get('sort', 'nom')  # Standart holatda nomi bo'yicha
+    sort = request.GET.get('sort', 'nom')
     kitoblar = Kitob.objects.filter(nom__icontains=q).order_by(sort)
 
     return render(request, 'kitoblar.html', {'kitoblar': kitoblar, 'q': q, 'sort': sort})
-
-
-def talabalar_view(request):
-    q = request.GET.get('q', '')
-    sort = request.GET.get('sort', 'ism')  # Standart holatda ismi bo'yicha
-
-    talabalar = Talaba.objects.filter(ism__icontains=q).order_by(sort)
-    return render(request, 'talabalar.html', {'talabalar': talabalar, 'q': q, 'sort': sort})
-
 
 def recordlar_view(request):
     q = request.GET.get('q', '')
