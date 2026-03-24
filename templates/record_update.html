@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Record | Tahrirlash | Kutubxona ></title>
+</head>
+<body><h1>Recordni tahrirlash</h1>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <label>Talaba:</label><br>
+    <input type="text" value="{{ record.talaba.ism }}" disabled>
+    <br><br>
+
+    <label>Kitob:</label><br>
+    <input type="text" value="{{ record.kitob.nom }}" disabled>
+    <br><br>
+
+    <label>Kutubxonachi:</label><br>
+    <input type="text" value="{{ record.kutubxonachi.ism }}" disabled>
+    <br><br>
+
+    <label>Olingan sana:</label><br>
+    <input type="date" value="{{ record.olingan_sana|date:'Y-m-d' }}" disabled>
+    <br><br>
+
+    <label>Qaytarish muddati:</label><br>
+    <input type="date" name="qaytarish_sana"
+           value="{{ record.qaytarish_sana|date:'Y-m-d' }}">
+    <br><br>
+
+    <button type="submit">Saqlash</button>
+</form>
+</body>
+</html>

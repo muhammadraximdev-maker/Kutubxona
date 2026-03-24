@@ -31,6 +31,9 @@
         <a href="{% url 'muallif_delete_confirm' muallif.id %}">
             <button>O'chirish</button>
         </a>
+        <a href="/mualliflar/{{ muallif.id }}/update">
+            <button>Tahrirlash</button>
+        </a>
     </p>
     {% empty %}
     <p>Mualliflar topilmadi.</p>
@@ -38,5 +41,28 @@
 
     <br>
     <a href="{% url 'home' %}">Bosh sahifaga qaytish</a>
+    <hr>
+   <h2>Yangi muallif</h2>
+<form method="POST">
+    {% csrf_token %}
+    <label for="ism"> Ismi:</label>
+    <input type="text" name="ism" id="ism" required> <br> <br>
+    <label for="jins">Jinsi:</label>
+    <select name="jins" id="jins">
+        <option value="Erkak">Erkak</option>
+        <option value="Ayol">Ayol</option>
+    </select>  <br><br>
+    <label for="tugilgan_sana"> Tug'ilgan sana:</label>
+    <input type="date" name="tugilgan_sana" id="tugilgan_sana" required> <br> <br>
+    <label for="kitob_soni">Kitob soni:</label>
+    <input type="number" name="kitob_soni" id="kitob_soni" required> <br> <br>
+    <label>
+    Tirikmi? <input type="checkbox" name="tirik" checked>
+    </label>
+    <button type="submit">Saqlash</button>
+
+
+
+</form>
 </body>
 </html>

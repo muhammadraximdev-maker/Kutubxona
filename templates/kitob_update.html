@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kitob | Tahrirlash  | Kutubxona</title>
+</head>
+<body>
+    <h1> Kitob ma'lumotlarini tahrirlash</h1>
+    <form method="POST" action="{% url 'kitob_update' kitob.id %}">
+    {% csrf_token %}
+        <label for="nom">Nomi:</label>
+        <input type="text" name="nom" id="nom" value="{{kitob.nom}}"> <br> <br>
+        <label for="janr">Janri:</label>
+        <input type="text" name="janr" id="janr" value="{{kitob.janr}}"> <br> <br>
+        <label for="sahifa">Sahifalar soni:</label>
+        <input type="number" name="sahifa" id="sahifa" value="{{kitob.sahifa}}"> <br> <br>
+        <label for="muallif">Muallif:</label>
+     <select name="muallif" id="muallif">
+    {% for muallif in mualliflar %}
+        <option value="{{ muallif.id }}" {% if muallif.id == kitob.muallif.id %}selected{% endif %}>
+            {{ muallif.ism }} {{ muallif.familiya }}
+        </option>
+
+    {% endfor %}
+</select>
+<br> <br>
+          <a href="{% url 'kitoblar' %}">
+    <button type="button">Bekor qilish</button>
+</a>
+
+<button type="submit">Saqlash</button>
+
+    </form>
+
+</body>
+</html>

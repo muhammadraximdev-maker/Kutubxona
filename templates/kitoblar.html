@@ -8,13 +8,13 @@
     <hr>
 
     <form method="get">
-        <input type="text" name="q" {% if q %}value="{{ q }}"{% endif %} placeholder="Qidiruv...">
+        <input type="text" name="q" {% if q %} value="{{ q }}"{% endif %} placeholder="Qidiruv...">
 
         <select name="sort">
-            <option value="nom" {% if sort == 'nom' %}selected{% endif %}>Nomi bo'yicha (a → z)</option>
-            <option value="-nom" {% if sort == '-nom' %}selected{% endif %}>Nomi bo'yicha (z → a)</option>
-            <option value="sahifa" {% if sort == 'sahifa' %}selected{% endif %}>Sahifa bo'yicha ↑</option>
-            <option value="-sahifa" {% if sort == '-sahifa' %}selected{% endif %}>Sahifa bo'yicha ↓</option>
+            <option value="nom" {% if sort == 'nom' %} selected{% endif %}>Nomi bo'yicha (a → z)</option>
+            <option value="-nom" {% if sort == '-nom' %} selected{% endif %}>Nomi bo'yicha (z → a)</option>
+            <option value="sahifa" {% if sort == 'sahifa' %} selected{% endif %}>Sahifa bo'yicha ↑</option>
+            <option value="-sahifa" {% if sort == '-sahifa' %} selected{% endif %}>Sahifa bo'yicha ↓</option>
         </select>
 
         <button type="submit">Go</button>
@@ -33,7 +33,10 @@
 
         <a href="{% url 'kitob_delete_confirm' kitob.id %}">
           <button>O'chirish</button>
-           </a>
+        </a>
+        <a href="/kitoblar/{{ kitob.id }}/update">
+            <button>Tahrirlash</button>
+        </a>
     </p>
     {% empty %}
     <p>Kitoblar topilmadi.</p>
@@ -41,5 +44,24 @@
 
     <br>
     <a href="{% url 'home' %}">Bosh sahifaga qaytish</a>
+    <hr>
+    <h2>Yangi kitob</h2>
+<form method="POST">
+    {% csrf_token %}
+    <label for="nom" >Nomi:</label>
+    <input type="text" name="nom" id="nom" required> <br> <br>
+    <label for="janr" >Janr:</label>
+    <input type="text" name="janr" id="janr" required> <br> <br>
+    <label for="sahifa" >Sahifalar soni:</label>
+    <input type="number" name="sahifa" id="sahifa" required> <br> <br>
+    <label for="muallif"> Muallif: </label>
+    <select name="muallif" id="muallif">
+        <option value=""> ---Muallifni tanlang---</option>
+         {%for m in mualliflar %}
+            <option value="{{ m.id }}">  {{ m.ism }} </option>
+         {% endfor %}
+    </select> <br> <br>
+    <button type="submit">Saqlash</button>
+</form>
 </body>
 </html>

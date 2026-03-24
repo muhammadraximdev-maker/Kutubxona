@@ -28,6 +28,9 @@
         <a href="/talabalar/{{ talaba.id }}/delete-confirm">
             <button>O'chirish</button>
         </a>
+        <a href="/talabalar/{{ talaba.id }}/update">
+            <button>Tahrirlash</button>
+        </a>
     </p>
     {% empty %}
     <p>Hech qanday talaba topilmadi.</p>
@@ -35,5 +38,24 @@
 
     <br>
     <a href="{% url 'home' %}">Bosh sahifaga qaytish</a>
+    <hr>
+    <h2>Yangi talaba</h2>
+<form method="POST">
+    {% csrf_token %}
+    <label for="ism" >Ism:</label>
+    <input type="text" name="ism" id="ism"  required><br><br>
+    <label for="guruh" >Guruh:</label>
+    <input type="text" name="guruh" id="guruh"  required><br><br>
+    <label for="kurs" >Bosqich:</label>
+    <select name="kurs" id="kurs">
+        <option value="1">1-kurs</option>
+        <option value="2">2-kurs</option>
+        <option value="3">3-kurs</option>
+        <option value="4">4-kurs</option>    </select>  <br><br>
+    <label for="kitob_soni">Kitob soni:</label>
+    <input type="number"name="kitob_soni" id="kitob_soni"   value="0"  >
+    <button type="submit">Saqlash</button>
+
+</form>
 </body>
 </html>

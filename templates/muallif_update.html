@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Muallif | Tahrirlash | Kutubxona</title>
+</head>
+<body>
+    <h1> Muallif ma'lumotlarini tahrirlash</h1>
+    <form method="POST" action="{% url 'muallif_update' muallif.id %}">
+    {% csrf_token %}
+     <label for="ism"> Ismi:</label>
+    <input type="text" name="ism" id="ism" value="{{muallif.ism}}"> <br> <br>
+    <label for="jins">Jinsi:</label>
+   <select name="jins" id="jins">
+    <option value="Erkak" {% if muallif.jins == "Erkak" %}selected{% endif %}>
+        Erkak
+    </option>
+    <option value="Ayol" {% if muallif.jins == "Ayol" %}selected{% endif %}>
+        Ayol
+    </option>
+    </select> <br><br>
+    <label for="tugilgan_sana"> Tug'ilgan sana:</label>
+    <input type="date" name="tugilgan_sana" id="tugilgan_sana" value="{{ muallif.tugilgan_sana|date:'Y-m-d' }}"> <br> <br>
+    <label for="kitob_soni">Kitob soni:</label>
+    <input type="number" name="kitob_soni" id="kitob_soni" value="{{muallif.kitob_soni}}"> <br> <br>
+    <label>
+    Tirikmi? <input type="checkbox" name="tirik" checked>
+    </label>
+
+        <a href="{% url 'mualliflar' %}">
+    <button type="button">Bekor qilish</button>
+</a>
+
+    <button type="submit">Tahrirlash</button>
+</form>
+</body>
+</html>

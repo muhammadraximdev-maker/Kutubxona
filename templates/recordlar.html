@@ -5,37 +5,92 @@
     <title>Recordlar | Kutubxona</title>
 </head>
 <body>
-    <h1>Kutubxona Recordlari (Kitob topshirish-olish)</h1>
-    <hr>
 
-    <table border="1" cellpadding="10">
-        <thead>
+<h1>Kutubxona Recordlari (Kitob topshirish-olish)</h1>
+<hr>
+
+<table border="1" cellpadding="10">
+    <thead>
+        <tr>
+            <th>Talaba</th>
+            <th>Kitob</th>
+            <th>Kutubxonachi</th>
+            <th>Olingan sana</th>
+            <th>Qaytarish muddati</th>
+            <th>Amallar</th> <!-- 🔥 YANGI -->
+        </tr>
+    </thead>
+    <tbody>
+        {% for record in recordlar %}
             <tr>
-                <th>Talaba</th>
-                <th>Kitob</th>
-                <th>Kutubxonachi</th>
-                <th>Olingan sana</th>
-                <th>Qaytarish muddati</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for record in recordlar %}
-                <tr>
-                    <td>{{ record.talaba.ism }}</td>
-                    <td>{{ record.kitob.nom }}</td>
-                    <td>{{ record.kutubxonachi.ism }}</td>
-                    <td>{{ record.olingan_sana }}</td>
-                    <td>{{ record.qaytarish_sana }}</td>
-                </tr>
-            {% empty %}
-                <tr>
-                    <td colspan="5">⚠️ Hozircha hech qanday record mavjud emas.</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                <td>{{ record.talaba.ism }}</td>
+                <td>{{ record.kitob.nom }}</td>
+                <td>{{ record.kutubxonachi.ism }}</td>
+                <td>{{ record.olingan_sana }}</td>
+                <td>{{ record.qaytarish_sana }}</td>
 
-    <br>
-    <a href="{% url 'home' %}">Bosh sahifaga qaytish</a>
+                <!-- 🔥 UPDATE TUGMA -->
+                <td>
+                    <a href="{% url 'record_update' record.id %}">
+                        Tahrirlash
+                    </a>
+                </td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="6">⚠️ Hozircha hech qanday record mavjud emas.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<br>
+<a href="{% url 'home' %}">Bosh sahifaga qaytish</a>
+
+<hr>
+
+<h2>Yangi record</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <label for="talaba">Talabani tanlang:</label><br>
+    <select name="talaba" id="talaba" required>
+        <option value="">--- Talabalar ---</option>
+        {% for t in talabalar %}
+            <option value="{{ t.id }}">{{ t.ism }} ({{ t.guruh }})</option>
+        {% endfor %}
+    </select>
+    <br><br>
+
+    <label for="kitob">Kitobni tanlang:</label><br>
+    <select name="kitob" id="kitob" required>
+        <option value="">--- Kitoblar ---</option>
+        {% for k in kitoblar %}
+            <option value="{{ k.id }}">{{ k.nom }}</option>
+        {% endfor %}
+    </select>
+    <br><br>
+
+    <label for="kutubxonachi">Mas'ul kutubxonachi:</label><br>
+    <select name="kutubxonachi" id="kutubxonachi" required>
+        <option value="">--- Kutubxonachilar ---</option>
+        {% for k in kutubxonachilar %}
+            <option value="{{ k.id }}">{{ k.ism }}</option>
+        {% endfor %}
+    </select>
+    <br><br>
+
+    <label for="olingan_sana">Olingan sana:</label><br>
+    <input type="date" name="olingan_sana" id="olingan_sana" required>
+    <br><br>
+
+    <label for="qaytarish_sana">Qaytarish muddati:</label><br>
+    <input type="date" name="qaytarish_sana" id="qaytarish_sana" required>
+    <br><br>
+
+    <button type="submit">Recordni saqlash</button>
+</form>
+
 </body>
 </html>

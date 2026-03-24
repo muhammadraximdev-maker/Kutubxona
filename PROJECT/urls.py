@@ -17,6 +17,10 @@ urlpatterns = [
     path('muallif/<int:pk>/', muallif_detail_view, name='muallif_detail'),
     path('kutubxonachi/<int:pk>/', kutubxonachi_detail_view, name='kutubxonachi_detail'),
 
+    path('talabalar/<int:pk>/update', talaba_update_view, name='talaba_update'),
+    path('kitoblar/<int:pk>/update', kitob_update_view, name='kitob_update'),
+    path('mualliflar/<int:pk>/update', muallif_update_view, name='muallif_update'),
+    path('recordlar/<int:pk>/update', record_update_view, name='record_update'),
     path('talabalar/<int:pk>/delete', talaba_delete_view, name='talaba_delete'),
     path('talabalar/<int:pk>/delete-confirm', talaba_delete_confirm_view),
     path('kitob/<int:pk>/delete', kitob_delete_view, name='kitob_delete'),
