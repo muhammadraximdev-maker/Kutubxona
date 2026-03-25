@@ -45,20 +45,7 @@
    <h2>Yangi muallif</h2>
 <form method="POST">
     {% csrf_token %}
-    <label for="ism"> Ismi:</label>
-    <input type="text" name="ism" id="ism" required> <br> <br>
-    <label for="jins">Jinsi:</label>
-    <select name="jins" id="jins">
-        <option value="Erkak">Erkak</option>
-        <option value="Ayol">Ayol</option>
-    </select>  <br><br>
-    <label for="tugilgan_sana"> Tug'ilgan sana:</label>
-    <input type="date" name="tugilgan_sana" id="tugilgan_sana" required> <br> <br>
-    <label for="kitob_soni">Kitob soni:</label>
-    <input type="number" name="kitob_soni" id="kitob_soni" required> <br> <br>
-    <label>
-    Tirikmi? <input type="checkbox" name="tirik" checked>
-    </label>
+   {{ form.as_p}}
     <button type="submit">Saqlash</button>
 
 

@@ -48,19 +48,7 @@
     <h2>Yangi kitob</h2>
 <form method="POST">
     {% csrf_token %}
-    <label for="nom" >Nomi:</label>
-    <input type="text" name="nom" id="nom" required> <br> <br>
-    <label for="janr" >Janr:</label>
-    <input type="text" name="janr" id="janr" required> <br> <br>
-    <label for="sahifa" >Sahifalar soni:</label>
-    <input type="number" name="sahifa" id="sahifa" required> <br> <br>
-    <label for="muallif"> Muallif: </label>
-    <select name="muallif" id="muallif">
-        <option value=""> ---Muallifni tanlang---</option>
-         {%for m in mualliflar %}
-            <option value="{{ m.id }}">  {{ m.ism }} </option>
-         {% endfor %}
-    </select> <br> <br>
+    {{ form.as_p}}
     <button type="submit">Saqlash</button>
 </form>
 </body>
